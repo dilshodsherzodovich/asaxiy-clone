@@ -1,8 +1,8 @@
-const stringMiddleware = () => (next) => (action) => {
+const stringMiddleWare = () => (next) => (action) => {
   if (typeof action === "string") {
     return next({ type: action });
   }
-  return action;
+  return next(action);
 };
 
-export default stringMiddleware;
+export default stringMiddleWare;

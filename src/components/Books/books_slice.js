@@ -4,10 +4,14 @@ import { BOOKS_API } from "../../config";
 
 const initialState = {
   books: [],
-  booksLoadingStatus: "not loading",
+  loading: "notLoading",
 };
 
-export const fetchBooks = createAsyncThunk("books/fetchbooks", async () => {});
+export const fetchBooks = createAsyncThunk("books/fecthBooks", async () => {
+  const { request } = useHttp();
+  const data = await request(BOOKS_API + "new");
+  return data.books;
+});
 
 const booksSlice = createSlice({
   name: "books",
@@ -15,20 +19,18 @@ const booksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBooks.pending, (state, action) => {
-        state.booksLoadingStatus = "loading";
+      .addCase(fetchBooks.pending, (state) => {
+        state.loading = "loading";
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.books = action.payload;
-        state.booksLoadingStatus = "not loading";
+        state.loading = "notLoading";
       })
-      .addCase(fetchBooks.rejected, (state, action) => {
-        state.booksLoadingStatus = "error";
-      })
-      .addDefaultCase(() => {});
+      .addCase(fetchBooks.rejected, (state) => {
+        state.loading = "error";
+      });
   },
 });
 
 const { reducer, actions } = booksSlice;
-
 export default reducer;

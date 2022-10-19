@@ -1,5 +1,5 @@
 export const useHttp = () => {
-  const request = async (url, method = "GET", body = null, headers = {}) => {
+  const request = async (url, method = "GET", body = null, headers) => {
     try {
       const res = await fetch(url, { method, body, headers });
       if (!res.ok) {
