@@ -13,7 +13,7 @@ function Discount() {
   //   //eslint-disable-next-line
   // }, []);
 
-  const deadline = "2022-10-21";
+  const deadline = "2022-10-25";
 
   const getTime = (endTime) => {
     const total = Date.parse(endTime) - Date.parse(new Date()),
